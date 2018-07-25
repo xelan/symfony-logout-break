@@ -1,0 +1,33 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:  { password: pass, roles: [ 'ROLE_USER' ] }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        login:
+            pattern:  ^/login$
+            security: false
+
+        secured_area:
+            pattern:        ^/
+            form_login:
+                check_path: example_login_check
+                login_path: example_login
+                require_previous_session: false
+            logout:
+                path:       example_logout
+                target:     /
+            anonymous:      ~
+
+    access_control:
+        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/test$, roles: ROLE_USER }
+        - { path: ^/, roles: ROLE_DUMMY_NO_ACCESS }

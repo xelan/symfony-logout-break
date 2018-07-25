@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form action="{{ path('example_login_check') }}" id="login" method="post">
+    <input type="text" id="username" name="_username" placeholder="User"  autofocus="autofocus" />
+    <input type="password" id="password" name="_password" placeholder="Password" />
+    <button>Login</button>
+</form>
+{% endblock %}
